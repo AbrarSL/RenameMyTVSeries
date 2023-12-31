@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.tweaking4all.RenameMyTVSeries</id>
+  
+  <name>RenameMyTVSeries</name>
+  <summary>Rename files with data from TVDB</summary>
+  
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>Unlicense</project_license>
+  
+  <recommends>
+    <display_length compare="ge">1366</display_length>
+  </recommends>
+  
+  <description>
+    <p>
+      Allows you to rename TV shows, movies and any other media file with information from the TVDB.
+    </p>
+    <p>
+      - Allows you to manually select the mapping between episodes and files - Custom templates for the filename scheme can be set
+    </p>
+  </description>
+  
+  <launchable type="desktop-id">com.tweaking4all.RenameMyTVSeries.desktop</launchable>
+</component>

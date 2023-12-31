@@ -1,0 +1,117 @@
+{
+  "id": "com.tweaking4all.RenameMyTVSeries",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "23.08",
+  "sdk": "org.freedesktop.Sdk",
+  "command": "RenameMyTVSeries",
+  "finish-args": [
+    "--share=network",
+    "--socket=x11",
+    "--filesystem=home",
+    "--filesystem=xdg-run/gvfs"
+  ],
+  "modules": [
+    "shared-modules/gtk2/gtk2.json",
+    {
+      "name": "sqlite3",
+      "buildsystem": "simple",
+      "build-commands": [
+        "./configure --prefix=/app",
+        "make",
+        "make install"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://www.sqlite.org/2023/sqlite-autoconf-3440200.tar.gz",
+          "sha256": "1c6719a148bc41cf0f2bbbe3926d7ce3f5ca09d878f1246fcc20767b175bb407"
+        }
+      ],
+      "cleanup": [
+        "/share/doc",
+        "/share/man"
+      ]
+    },
+    {
+      "name": "openssl",
+      "buildsystem": "simple",
+      "build-commands": [
+        "./config --prefix=/app",
+        "make",
+        "make install"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://www.openssl.org/source/openssl-1.1.1w.tar.gz",
+          "sha256": "cf3098950cb4d853ad95c0841f1f9c6d3dc102dccfcacd521d93925208b76ac8"
+        }
+      ],
+      "cleanup": [
+        "/share/doc",
+        "/share/man"
+      ]
+    },
+    {
+      "name": "libnotify",
+      "buildsystem": "meson",
+      "config-opts": [
+        "-Dtests=false",
+        "-Dintrospection=disabled",
+        "-Dman=false",
+        "-Dgtk_doc=false",
+        "-Ddocbook_docs=disabled"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.gnome.org/sources/libnotify/0.8/libnotify-0.8.3.tar.xz",
+          "sha256": "ee8f3ef946156ad3406fdf45feedbdcd932dbd211ab4f16f75eba4f36fb2f6c0",
+          "x-checker-data": {
+            "type": "gnome",
+            "name": "libnotify",
+            "stable-only": true
+          }
+        },
+        {
+          "type": "archive",
+          "url": "https://download.gnome.org/sources/gnome-common/3.18/gnome-common-3.18.0.tar.xz",
+          "sha256": "22569e370ae755e04527b76328befc4c73b62bfd4a572499fde116b8318af8cf",
+          "x-checker-data": {
+            "type": "gnome",
+            "name": "gnome-common",
+            "stable-only": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "renamemytvseries",
+      "buildsystem": "simple",
+      "build-commands": [
+        "install -D ffprobe /app/bin/ffprobe",
+        "install -D RenameMyTVSeries /app/bin/RenameMyTVSeries",
+        "mv icons/* ./",
+        "for icon in *png; do mkdir -p /app/share/icons/hicolor/${icon/.png}/apps/; mv $icon /app/share/icons/hicolor/${icon/.png}/apps/com.tweaking4all.RenameMyTVSeries.png; done",
+        "install -D com.tweaking4all.RenameMyTVSeries.metainfo.xml /app/share/metainfo/com.tweaking4all.RenameMyTVSeries.metainfo.xml",
+        "install -D com.tweaking4all.RenameMyTVSeries.desktop /app/share/applications/com.tweaking4all.RenameMyTVSeries.desktop"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://www.tweaking4all.com/downloads/video/RenameMyTVSeries-2.0.10-Linux64bit.tar.gz",
+          "sha256": "3e54a420ab562470d9d09206d8d5351f9a37769921bdff4538279f83061f6ba1",
+          "strip-components": 0
+        },
+        {
+          "type": "file",
+          "path": "com.tweaking4all.RenameMyTVSeries.metainfo.xml"
+        },
+        {
+          "type": "file",
+          "path": "com.tweaking4all.RenameMyTVSeries.desktop"
+        }
+      ]
+    }
+  ]
+}

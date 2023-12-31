@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+
+Name=RenameMyTVSeries
+Comment=Rename files with data from TVDB
+Categories=AudioVideo;AudioVideoEditing;
+
+Icon=com.tweaking4all.RenameMyTVSeries
+Exec=RenameMyTVSeries
+Terminal=false
